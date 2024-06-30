@@ -1,0 +1,46 @@
+body {
+    font-family: system-ui, sans-serif;
+    margin: 100px;
+    background-color: hsl(0, 0%, 7%);
+    color: white;
+}
+
+#infoCard {
+    background-color: hsl(0, 0%, 16%);
+    padding: 24px;
+    border-radius: 12px;
+    margin: 50px auto;
+}
+
+#infoCard h1 {
+    justify-content: center;
+    display: flex;
+}
+
+#cardsContainer {
+    background-color: hsl(0, 0%, 16%);
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.countdownCard {
+    background-color: hsl(0, 0%, 12%);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px;
+    width: 500px;
+}
+
+.countdownDisplay {
+    display: flex;
+    padding: auto, 12px;
+}
+
+.dayDisplay, .hourDisplay, .minDisplay, .secDisplay {
+    background-color: black;
+    padding: 8px;
+    text-align: center;
+    margin: auto 12px;
+}
