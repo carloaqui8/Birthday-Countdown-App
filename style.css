@@ -19,14 +19,14 @@ body {
 
 #cardsContainer {
     background-color: hsl(0, 0%, 16%);
-    padding: 12px;
+    padding: 24px;
     border-radius: 12px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .collapsible {
-    width: 500px;
+    width: 516px;
     height: 32px;
     background-color: hsl(0, 0%, 32%);
     color: white;
@@ -35,7 +35,7 @@ body {
     outline: none;
     text-align: left;
     font-size: 16px;
-    padding: 8px
+    margin: 24px 24px 0 24px;
 }
 
 .active, .collapsible:hover {
@@ -44,8 +44,12 @@ body {
 
 .myForm {
     display: none;
+    width: 500px;
+    padding: 8px;
+    margin: 0 24px;
     overflow: hidden;
     background-color: hsl(0, 0%, 12%);
+    justify-content: left;
 }
 
 .countdownCard {

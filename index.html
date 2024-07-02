@@ -18,14 +18,19 @@
     </div>
 
     <div id="cardsContainer">
-        <button type="button" class="collapsible">Add a Birthday</button>
-        <div class="myForm">
-            <form>
-                <input type="text" class="nameInput" placeholder="Name"><br>
-                <input type="date" class="dateTime" placeholder="Name"><br>
-                <button type="submit" class="mySubmit" onclick="createCard()">
-            </form>
+        <div>
+            <button type="button" class="collapsible">Add a Birthday</button>
+            <div class="myForm">
+                <form>
+                    <label for="nameInput">Name:</label>
+                    <input type="text" class="nameInput" placeholder="Name"><br>
+                    <label for="dateInput">Date:</label>
+                    <input type="date" class="dateInput" placeholder="Name"><br>
+                    <button type="submit" value="submit" class="mySubmit" onclick="createCard()">
+                </form>
+            </div>
         </div>
+
         <div class="countdownCard">
             <h2>Carlo Aqui</h2>
             <h4>November 11</h4>
@@ -37,7 +42,7 @@
                 <div class="secDisplay">00<br>Seconds</div>
             </div>
         </div>
-        
+
         <!-- <div class="countdownCard">
             <h2>Carlo Aqui</h2>
             <h4>November 11</h4>
