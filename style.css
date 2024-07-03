@@ -36,10 +36,24 @@ body {
     text-align: left;
     font-size: 16px;
     margin: 24px 24px 0 24px;
+    border-radius: 12px;
 }
 
 .active, .collapsible:hover {
     background-color: hsl(0, 0%, 48%);
+}
+
+.collapsible:after {
+    content: "\002B";
+    font-size: 18px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    font-size: 18px;
+    content: "\2212";
 }
 
 .myForm {
@@ -50,6 +64,10 @@ body {
     overflow: hidden;
     background-color: hsl(0, 0%, 12%);
     justify-content: left;
+    border-radius: 0 0 12px 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
 
 .countdownCard {
@@ -65,7 +83,10 @@ body {
     padding: auto, 12px;
 }
 
-.dayDisplay, .hourDisplay, .minDisplay, .secDisplay {
+.dayDisplay,
+.hourDisplay,
+.minDisplay,
+.secDisplay {
     background-color: black;
     padding: 8px;
     text-align: center;
