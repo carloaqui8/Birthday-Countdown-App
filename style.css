@@ -70,10 +70,19 @@ body {
     transition: max-height 0.2s ease-out;
 }
 
+.dateInput {
+    cursor: pointer;
+}
+
+.mySubmit {
+    cursor: pointer;
+}
+
 .countdownCard {
     background-color: hsl(0, 0%, 12%);
     border-radius: 8px;
     padding: 24px;
+    padding-top: 0;
     margin: 24px;
     width: 500px;
 }
@@ -91,4 +100,18 @@ body {
     padding: 8px;
     text-align: center;
     margin: auto 12px;
+}
+
+.deleteButton {
+    float: right;
+    color: red;
+    background-color: hsl(0, 0%, 12%);
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: none;
+}
+
+.deleteButton:hover {
+    color: hsl(0, 100%, 75%);
 }
