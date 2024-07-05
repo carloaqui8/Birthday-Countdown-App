@@ -34,6 +34,7 @@ myForm[0].addEventListener("submit", (event) => {
 })
 
 function createNewCard(name, date) {
+    //Create a new card with each attribute needed
     const newCard = document.createElement("div");
     const myH2 = document.createElement("h2");
     const myH4 = document.createElement("h4");
@@ -44,8 +45,10 @@ function createNewCard(name, date) {
     let secDisplay = document.createElement("div");
     let deleteButton = document.createElement("button");
 
+    //Add headings that show name and date
     newCard.classList.add("countdownCard");
     myH2.textContent = name;
+    let monthNum = date.slice(5, 7).trim();
     let month = date.slice(5, 7).trim();
     let day = date.slice(8).replace(/^0+/, "");
     switch (month) {
@@ -88,6 +91,7 @@ function createNewCard(name, date) {
     }
     myH4.textContent = month + " " + day;
 
+    //Add countdown display
     countdownDisplay.classList.add("countdownDisplay");
     dayDisplay.classList.add("dayDisplay");
     hourDisplay.classList.add("hourDisplay");
@@ -98,10 +102,39 @@ function createNewCard(name, date) {
     minDisplay.innerHTML = `00<br>Minutes`;
     secDisplay.innerHTML = `00<br>Seconds`;
 
+    //Date countdown stuff
+    let today = new Date();
+    let futureDate;
+    if ((today.getMonth() == (Number(monthNum) - 1) &&
+        today.getDay() > day) || today.getMonth() > (Number(monthNum) - 1)) {
+        futureDate = new Date(today.getFullYear() + 1, monthNum - 1, day);
+    }
+    else {
+        futureDate = new Date(today.getFullYear(), monthNum - 1, day);
+    }
+    const timeRemaining = futureDate.getTime() - today.getTime();
+    
+    
+    //Define time metrics in ms
+    const aDay = 24 * 60 * 60 * 1000;
+    const anHour = 60 * 60 * 1000;
+    const aMinute = 60 * 1000;
+    
+    console.log(today);
+    console.log(futureDate);
+    console.log(timeRemaining);
+    console.log();
+
+    //Calculate time remaining for each
+
+    //Change values to countdownDisplay
+
+    //Add delete button
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("deleteButton");
     deleteButton.onclick = deleteCard;
 
+    //Add the various parts to the card div
     newCard.appendChild(myH2);
     newCard.appendChild(myH4);
     newCard.appendChild(countdownDisplay);
@@ -111,13 +144,17 @@ function createNewCard(name, date) {
     countdownDisplay.appendChild(secDisplay);
     newCard.appendChild(deleteButton);
 
+    //Push it to the display
     cardsContainer.prepend(newCard);
 }
 
 //Figure out a way to delete the specified card every time
 function deleteCard() {
-    const theButton = document.getElementsByClassName("deleteButton");
-    const theCard = theButton[0].parentNode;
-    console.log(theButton);
-    console.log(theCard);
+    // const delButtons = document.getElementsByClassName("deleteButton");
+    // for (let i = 0; i < delButtons.length; i++) {
+
+    //     console.log(delButtons[i].parentNode);
+    // // console.log(theCard);
+    // }
+    // const theCard = delButtons[0].parentNode;
 }
