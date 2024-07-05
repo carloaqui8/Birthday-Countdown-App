@@ -1,6 +1,7 @@
 const cardsContainer = document.getElementById("cardsContainer");
 const collapsibles = document.getElementsByClassName("collapsible");
 let myForm = document.getElementsByClassName("myForm");
+let errorMsg = document.getElementById("errorMsg");
 
 collapsibles[0].addEventListener("click", () => {
     collapsibles[0].classList.toggle("active");
@@ -26,9 +27,11 @@ myForm[0].addEventListener("submit", (event) => {
     let name = document.getElementsByClassName("nameInput");
     let date = document.getElementsByClassName("dateInput");
     if (name[0].value === "" || date[0].value === "") {
-        console.error("BOOOOOO");
+        errorMsg.textContent = "Error: Please enter a name and date";
+        errorMsg.style.display = "block";
     }
     else {
+        errorMsg.style.display = "none";
         createNewCard(name[0].value, date[0].value);
     }
 })
@@ -102,32 +105,7 @@ function createNewCard(name, date) {
     minDisplay.innerHTML = `00<br>Minutes`;
     secDisplay.innerHTML = `00<br>Seconds`;
 
-    //Date countdown stuff
-    let today = new Date();
-    let futureDate;
-    if ((today.getMonth() == (Number(monthNum) - 1) &&
-        today.getDay() > day) || today.getMonth() > (Number(monthNum) - 1)) {
-        futureDate = new Date(today.getFullYear() + 1, monthNum - 1, day);
-    }
-    else {
-        futureDate = new Date(today.getFullYear(), monthNum - 1, day);
-    }
-    const timeRemaining = futureDate.getTime() - today.getTime();
-    
-    
-    //Define time metrics in ms
-    const aDay = 24 * 60 * 60 * 1000;
-    const anHour = 60 * 60 * 1000;
-    const aMinute = 60 * 1000;
-    
-    console.log(today);
-    console.log(futureDate);
-    console.log(timeRemaining);
-    console.log();
-
-    //Calculate time remaining for each
-
-    //Change values to countdownDisplay
+    // getRemainingTime(monthNum, day, dayDisplay, hourDisplay, minDisplay, secDisplay);
 
     //Add delete button
     deleteButton.textContent = "Delete";
@@ -148,6 +126,41 @@ function createNewCard(name, date) {
     cardsContainer.prepend(newCard);
 }
 
+function getRemainingTime(monthNum, day, dayDisplay, hourDisplay, minDisplay, secDisplay) {
+    //Date countdown stuff
+    let today = new Date();
+    let futureDate;
+    if ((today.getMonth() == (Number(monthNum) - 1) &&
+        today.getDay() >= day) || today.getMonth() > (Number(monthNum) - 1)) {
+        futureDate = new Date(today.getFullYear() + 1, monthNum - 1, day);
+    }
+    else {
+        futureDate = new Date(today.getFullYear(), monthNum - 1, day);
+    }
+    const timeRemaining = futureDate.getTime() - today.getTime();
+
+    //Define time metrics in ms
+    const aDay = 24 * 60 * 60 * 1000;
+    const anHour = 60 * 60 * 1000;
+    const aMinute = 60 * 1000;
+
+    //Calculate time remaining for each
+    let daysRem = Math.floor(timeRemaining / aDay);
+    let hoursRem = Math.floor((timeRemaining % aDay) / anHour);
+    let minRem = Math.floor((timeRemaining % anHour) / aMinute);
+    let secRem = Math.floor((timeRemaining % aMinute) / 1000);
+    console.log(daysRem);
+    console.log(hoursRem);
+    console.log(minRem);
+    console.log(secRem);
+    
+    //Change values to countdownDisplay
+    dayDisplay.innerHTML = `${daysRem}<br>Days`;
+    hourDisplay.innerHTML = `${hoursRem}<br>Hours`;
+    minDisplay.innerHTML = `${minRem}<br>Minutes`;
+    secDisplay.innerHTML = `${secRem}<br>Seconds`;
+}
+
 //Figure out a way to delete the specified card every time
 function deleteCard() {
     // const delButtons = document.getElementsByClassName("deleteButton");
@@ -158,3 +171,5 @@ function deleteCard() {
     // }
     // const theCard = delButtons[0].parentNode;
 }
+
+// let countdown = setInterval(getRemainingTime, 1000);
