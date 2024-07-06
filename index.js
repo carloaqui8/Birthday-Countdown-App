@@ -2,6 +2,7 @@ const cardsContainer = document.getElementById("cardsContainer");
 const collapsibles = document.getElementsByClassName("collapsible");
 let myForm = document.getElementsByClassName("myForm");
 let errorMsg = document.getElementById("errorMsg");
+let deleteButtons = document.getElementsByClassName("deleteButton");
 
 collapsibles[0].addEventListener("click", () => {
     collapsibles[0].classList.toggle("active");
@@ -105,12 +106,11 @@ function createNewCard(name, date) {
     minDisplay.innerHTML = `00<br>Minutes`;
     secDisplay.innerHTML = `00<br>Seconds`;
 
-    // getRemainingTime(monthNum, day, dayDisplay, hourDisplay, minDisplay, secDisplay);
+    // getRemainingTime();
 
     //Add delete button
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("deleteButton");
-    deleteButton.onclick = deleteCard;
 
     //Add the various parts to the card div
     newCard.appendChild(myH2);
@@ -124,6 +124,14 @@ function createNewCard(name, date) {
 
     //Push it to the display
     cardsContainer.prepend(newCard);
+
+    for (i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].onclick = function() {
+            let card = this.parentElement;
+            card.style.display = "none";
+        }
+    }
+    console.log(deleteButtons);
 }
 
 function getRemainingTime(monthNum, day, dayDisplay, hourDisplay, minDisplay, secDisplay) {
@@ -153,23 +161,12 @@ function getRemainingTime(monthNum, day, dayDisplay, hourDisplay, minDisplay, se
     console.log(hoursRem);
     console.log(minRem);
     console.log(secRem);
-    
+
     //Change values to countdownDisplay
     dayDisplay.innerHTML = `${daysRem}<br>Days`;
     hourDisplay.innerHTML = `${hoursRem}<br>Hours`;
     minDisplay.innerHTML = `${minRem}<br>Minutes`;
     secDisplay.innerHTML = `${secRem}<br>Seconds`;
-}
-
-//Figure out a way to delete the specified card every time
-function deleteCard() {
-    // const delButtons = document.getElementsByClassName("deleteButton");
-    // for (let i = 0; i < delButtons.length; i++) {
-
-    //     console.log(delButtons[i].parentNode);
-    // // console.log(theCard);
-    // }
-    // const theCard = delButtons[0].parentNode;
 }
 
 // let countdown = setInterval(getRemainingTime, 1000);
