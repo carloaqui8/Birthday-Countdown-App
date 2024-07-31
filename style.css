@@ -24,6 +24,7 @@ body {
     border-radius: 12px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .collapsible {
@@ -91,7 +92,7 @@ body {
     padding: 24px;
     padding-top: 0;
     margin: 24px;
-    width: 500px;
+    width: 444px;
 }
 
 .countdownDisplay {

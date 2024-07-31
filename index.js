@@ -3,7 +3,13 @@ const collapsibles = document.getElementsByClassName("collapsible");
 let myForm = document.getElementsByClassName("myForm");
 let errorMsg = document.getElementById("errorMsg");
 let deleteButtons = document.getElementsByClassName("deleteButton");
-let ids = [];
+
+//Check local storage if any cards exist and create them
+// localStorage.clear();
+let existingCards = JSON.parse(localStorage.getItem('nameAndDateObjs')) || [];
+existingCards.forEach((card) => {
+    createNewCard(String(card.name), card.date);
+});
 
 collapsibles[0].addEventListener("click", () => {
     collapsibles[0].classList.toggle("active");
@@ -28,11 +34,19 @@ myForm[0].addEventListener("submit", (event) => {
 
     let name = document.getElementsByClassName("nameInput");
     let date = document.getElementsByClassName("dateInput");
+
+    //Input validation
     if (name[0].value === "" || date[0].value === "") {
         errorMsg.textContent = "Error: Please enter a name and date";
         errorMsg.style.display = "block";
     }
     else {
+        //Store name and date to localStorage
+        const jsonObj = { "name": String(name[0].value), "date": String(date[0].value) };
+        existingCards.push(jsonObj);
+        localStorage.setItem('nameAndDateObjs', JSON.stringify(existingCards));
+        
+        //Create new card on page
         errorMsg.style.display = "none";
         createNewCard(name[0].value, date[0].value);
     }
@@ -129,8 +143,15 @@ function createNewCard(name, date) {
     setInterval(() => setRemainingTime(Number(monthNum) - 1, Number(day), countdownDisplay), 1000);
 
     //Add delete button functionality to each card
-    for (i = 0; i < deleteButtons.length; i++) {
+    for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].onclick = function () {
+            //Delete from local storage too
+            existingCards.reverse().splice(i, 1);
+            existingCards.reverse();
+            localStorage.setItem('nameAndDateObjs', JSON.stringify(existingCards));
+            console.log(existingCards);
+            console.log(localStorage);
+            
             let card = this.parentElement;
             card.style.display = "none";
         }
